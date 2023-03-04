@@ -6,10 +6,9 @@ print(downloaded_model_path)
 # Move the sd_v1-5_vae.ckpt to the root of this directory as "model.ckpt"
 import subprocess
 
-actual_locations_of_model_blob = subprocess.run("readlink -f " + downloaded_model_path, shell=True, stdout=subprocess.PIPE).stdout
-print(actual_locations_of_model_blob)
-
-out = subprocess.run("mv " + actual_locations_of_model_blob[-1] + " model.ckpt", shell=True, stdout=subprocess.PIPE)
+output = subprocess.run(["readlink", "-f", downloaded_model_path], capture_output=True, text=True)
+actual_locations_of_model_blob = output.stdout.strip().split("\n")
+out = subprocess.run(["mv", actual_locations_of_model_blob[-1], "model.ckpt"])
 print(out)
 
 print("✅ model.ckpt successfully downloaded")
