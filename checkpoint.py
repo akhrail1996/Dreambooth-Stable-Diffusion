@@ -11,11 +11,7 @@ directory_paths_output = subprocess.run(["ls", "-d", "logs/*"], capture_output=T
 directory_paths = directory_paths_output.stdout.strip().split("\n")
 
 last_checkpoint_file = directory_paths[-1] + "/checkpoints/last.ckpt"
-file_name = date_string[-1] + "_" + \
-            str(len(training_images)) + "_training_images_" + \
-            str(max_training_steps) + "_max_training_steps_" + \
-            token + "_token_" + \
-            class_word + "_class_word.ckpt"
+file_name = date_string[-1] + ".ckpt"
 
 file_name = file_name.replace(" ", "_")
 
